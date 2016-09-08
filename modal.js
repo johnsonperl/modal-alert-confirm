@@ -1,4 +1,4 @@
-function jmodal(option) {
+function jModal(option) {
 	var options = {
 		html: "",
 		width: "400px",
@@ -47,7 +47,7 @@ function jmodal(option) {
 	}
 }
 
-function modalAlert(option){
+function jAlert(option){
 	var options = {
 		title: "提示",
 		body:"",
@@ -91,6 +91,60 @@ function modalAlert(option){
 		if(!$("#jmodalAlert").hasClass("active")){
 			$("body").removeClass("modal-up");
 		}
-		$("#jmodalAlert div.buttons span:first-of-type").unbind("click");
+		$("#jmodalAlert div.buttons span").unbind("click");
+	}
+}
+
+function jConfirm(option){
+	var options = {
+		title: "提示",
+		body:"",
+		width: "400px",
+		height: "200px",
+		button_accept:"确定",
+		button_deny:"取消",
+		accept:function(){},
+		deny:function(){}
+	}
+
+	$.extend(options, option);
+
+	if ($("body #jmodalAlert").length == 0) {
+		$("body").append('<div id="jmodalAlert"></div>');
+	}
+	$("#jmodalAlert").html('<div id="alertbox" class="modalant"><div>' + options.title + '</div><div>'+options.body+'</div><div class="buttons"><span>'+options.button_accept+'</span><span>'+options.button_deny+'</span></div></div>');
+
+	setTimeout(function() {
+		$("#jmodalAlert > div").css({
+			width: options.width,
+			height: options.height,
+			"margin-left":  -(parseFloat(options.width) / 2) + "px",
+			"margin-top": -(parseFloat(options.height) / 2) + "px"
+		});
+
+		$("#jmodalAlert div.buttons span:first-of-type").click(function(){
+			hide();
+			options.accept();
+		});
+		$("#jmodalAlert div.buttons span:last-of-type").click(function(){
+			hide();
+			options.deny();
+		});
+
+		show()
+	}, 100);
+
+	var show = function(){
+		$("body").addClass("modal-up");
+		$("#jmodalAlert").addClass("active");
+	}
+
+	var hide = function(){
+		$("#jmodalAlert").removeClass("active");
+
+		if(!$("#jmodalAlert").hasClass("active")){
+			$("body").removeClass("modal-up");
+		}
+		$("#jmodalAlert div.buttons span").unbind("click");
 	}
 }

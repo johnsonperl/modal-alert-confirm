@@ -37,3 +37,6 @@ body.modal-up{overflow:hidden;}
 #jmodalAlert .buttons span{display:inline-block;margin-right:20px;padding:0 15px;color:#fff;height:36px;line-height: 36px;margin-top:7px;border-radius: 4px;font-size:14px;cursor:pointer;}
 #jmodalAlert .buttons span:first-of-type{background-color:#2185D0;}
 #jmodalAlert .buttons span:first-of-type:hover{background-color:#1678c2;}
+/*modal confirm*/
+#jmodalAlert .buttons span:nth-of-type(2){background-color:#949494;}
+#jmodalAlert .buttons span:nth-of-type(2):hover{background-color:#656565;}
