@@ -73,8 +73,8 @@ function modalAlert(option){
 		});
 
 		$("#jmodalAlert div.buttons span").click(function(){
+			hide();
 			options.accept();
-			hide()
 		});
 
 		show()
