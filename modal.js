@@ -3,7 +3,7 @@ var jmodal = {
 	layer_modal: "layerModal",
 	layer_alert: "layerAlert",
 	layer_confirm: "layerConfirm",
-
+	//stop click propagation
 	StopPPg: function(e) {
 		e.stopPropagation();
 	},
@@ -37,7 +37,7 @@ var jmodal = {
 		$("#" + layer).removeClass("show");
 	},
 
-	resizeLayer:function(layer,options){
+	resizeLayer: function(layer, options) {
 		return $("#" + layer).css({
 			width: options.width,
 			height: options.height,
@@ -60,7 +60,7 @@ var jmodal = {
 		}
 
 
-		this.resizeLayer(this.layer_modal,options).find("div:first-of-type").html(options.html);
+		this.resizeLayer(this.layer_modal, options).find("div:first-of-type").html(options.html);
 
 		if (options.clickclose) {
 			$("#" + this.modalBox).click(function() {
@@ -88,7 +88,7 @@ var jmodal = {
 			$("#" + this.modalBox).append('<div id="' + this.layer_alert + '" class="modalant jalcf" onclick="jmodal.StopPPg(event)"></div>');
 		}
 
-		this.resizeLayer(this.layer_alert,options).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button + '</span></div>');
+		this.resizeLayer(this.layer_alert, options).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button + '</span></div>');
 
 		$("#" + this.layer_alert + " div.buttons span").click(function() {
 			jmodal.Hide(jmodal.layer_alert);
@@ -115,7 +115,7 @@ var jmodal = {
 			$("#" + this.modalBox).append('<div id="' + this.layer_confirm + '" class="modalant jalcf" onclick="jmodal.StopPPg(event)"></div>');
 		}
 
-		this.resizeLayer(this.layer_confirm,options).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button_accept + '</span><span>' + options.button_deny + '</span></div>');
+		this.resizeLayer(this.layer_confirm, options).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button_accept + '</span><span>' + options.button_deny + '</span></div>');
 
 		$("#" + this.layer_confirm + " div.buttons span:first-of-type").click(function() {
 			jmodal.Hide(jmodal.layer_confirm);
