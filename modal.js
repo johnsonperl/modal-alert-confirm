@@ -1,78 +1,113 @@
+;
+//(function($, window, document, undefined) {
+//initiation
+var jmodalBox = "jmodal";
+var layer_modal = "layerModal";
+var layer_alert = "layerAlert";
+var layer_confirm = "layerConfirm";
+
+
+$(function() {
+	$("body").append('<div id="' + jmodalBox + '"></div>');
+});
+
 function jModal(option) {
 	var options = {
 		html: "",
 		width: "400px",
 		height: "300px",
-		clickclose:false
+		clickclose: false
 	}
 	$.extend(options, option);
 
-	if ($("body #jmodal").length == 0) {
-		$("body").append('<div id="jmodal"></div>');
+	if ($("#" + layer_modal).length == 0) {
+		$("#" + jmodalBox).append('<div id="' + layer_modal + '" class="modalant" onclick="jstopPPg(event)"><div></div><span id="jclosemodal" onclick="jmHide(\'' + layer_modal + '\')"></span></div>');
 	}
-	$("#jmodal").html('<div id="jmodalbox" class="modalant">' + options.html + '<span id="jclosemodal"></span></div>');
 
-	setTimeout(function() {
-		$("#jmodalbox").css({
+
+
+	var action = function() {
+		$("#" + layer_modal).css({
 			width: options.width,
 			height: options.height,
-			"margin-left":  -(parseFloat(options.width) / 2) + "px",
+			"margin-left": -(parseFloat(options.width) / 2) + "px",
 			"margin-top": -(parseFloat(options.height) / 2) + "px"
-		});
+		}).find("div:first-of-type").html(options.html);
 
-		$("#jclosemodal").click(function(){
-			hide()
-		});
-		$("#jmodalbox").click(function(e){
-			e.stopPropagation();
-		});
-		if(options.clickclose){
-			$("#jmodal").click(function(e){
-				e.stopPropagation();
-				hide();
+		if (options.clickclose) {
+			$("#" + jmodalBox).click(function() {
+				jmHide(layer_modal);
 			});
+		} else {
+			$("#" + jmodalBox).unbind("click");
 		}
-		show()
+	}
+
+	setTimeout(function() {
+		action();
+		jmShow(layer_modal);
 	}, 100);
-
-	var show = function(){
-		$("body").addClass("modal-up");
-		$("#jmodal").addClass("active");
-	}
-
-	var hide = function(){
-		$("#jmodal").removeClass("active");
-		$("body").removeClass("modal-up");
-		$("#jmodalbox,#jclosemodal,#jmodal").unbind("click");
-	}
 }
 
-function jAlert(option){
+function jstopPPg(e) {
+	e.stopPropagation();
+}
+
+function jmShow(layer) {
+	if (layer == layer_modal) {
+		$("#" + jmodalBox).addClass("dark");
+	} else {
+		$("#" + jmodalBox).removeClass("dark");
+	}
+	$("#" + layer).addClass("show");
+	$("body").addClass("modal-up");
+	$("#" + jmodalBox).addClass("active");
+}
+
+function jmHide(layer) {
+	var layer_arr = new Array(layer_modal, layer_alert, layer_confirm);
+	var ok = true;
+	for (var i = 0, len = layer_arr.length; i < len; i++) {
+		if (layer_arr[i] != layer && $("#" + layer_arr[i]).hasClass("show")) {
+			ok = false;
+			break;
+		}
+	}
+
+	if (ok) {
+		$("#" + jmodalBox).removeClass("active");
+		$("body").removeClass("modal-up");
+	}
+
+	$("#" + layer).removeClass("show");
+}
+
+function jAlert(option) {
 	var options = {
 		title: "提示",
-		body:"",
+		body: "",
 		width: "400px",
 		height: "200px",
-		button:"确定",
-		accept:function(){}
+		button: "确定",
+		accept: function() {}
 	}
 
 	$.extend(options, option);
 
-	if ($("body #jmodalAlert").length == 0) {
-		$("body").append('<div id="jmodalAlert"></div>');
+	if ($("#"+layer_alert).length == 0) {
+		$("#"+jmodal).append('<div id="'+layer_alert+'" class="modalant"></div>');
 	}
-	$("#jmodalAlert").html('<div id="alertbox" class="modalant"><div>' + options.title + '</div><div>'+options.body+'</div><div class="buttons"><span>'+options.button+'</span></div></div>');
+	$("#jmodalAlert").html('<div id="alertbox" class="modalant"><div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button + '</span></div></div>');
 
 	setTimeout(function() {
 		$("#jmodalAlert > div").css({
 			width: options.width,
 			height: options.height,
-			"margin-left":  -(parseFloat(options.width) / 2) + "px",
+			"margin-left": -(parseFloat(options.width) / 2) + "px",
 			"margin-top": -(parseFloat(options.height) / 2) + "px"
 		});
 
-		$("#jmodalAlert div.buttons span").click(function(){
+		$("#jmodalAlert div.buttons span").click(function() {
 			hide();
 			options.accept();
 		});
@@ -80,31 +115,31 @@ function jAlert(option){
 		show()
 	}, 100);
 
-	var show = function(){
+	var show = function() {
 		$("body").addClass("modal-up");
 		$("#jmodalAlert").addClass("active");
 	}
 
-	var hide = function(){
+	var hide = function() {
 		$("#jmodalAlert").removeClass("active");
 
-		if(!$("#jmodalAlert").hasClass("active")){
+		if (!$("#jmodalAlert").hasClass("active")) {
 			$("body").removeClass("modal-up");
 		}
 		$("#jmodalAlert div.buttons span").unbind("click");
 	}
 }
 
-function jConfirm(option){
+function jConfirm(option) {
 	var options = {
 		title: "提示",
-		body:"",
+		body: "",
 		width: "400px",
 		height: "200px",
-		button_accept:"确定",
-		button_deny:"取消",
-		accept:function(){},
-		deny:function(){}
+		button_accept: "确定",
+		button_deny: "取消",
+		accept: function() {},
+		deny: function() {}
 	}
 
 	$.extend(options, option);
@@ -112,21 +147,21 @@ function jConfirm(option){
 	if ($("body #jmodalAlert").length == 0) {
 		$("body").append('<div id="jmodalAlert"></div>');
 	}
-	$("#jmodalAlert").html('<div id="alertbox" class="modalant"><div>' + options.title + '</div><div>'+options.body+'</div><div class="buttons"><span>'+options.button_accept+'</span><span>'+options.button_deny+'</span></div></div>');
+	$("#jmodalAlert").html('<div id="alertbox" class="modalant"><div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button_accept + '</span><span>' + options.button_deny + '</span></div></div>');
 
 	setTimeout(function() {
 		$("#jmodalAlert > div").css({
 			width: options.width,
 			height: options.height,
-			"margin-left":  -(parseFloat(options.width) / 2) + "px",
+			"margin-left": -(parseFloat(options.width) / 2) + "px",
 			"margin-top": -(parseFloat(options.height) / 2) + "px"
 		});
 
-		$("#jmodalAlert div.buttons span:first-of-type").click(function(){
+		$("#jmodalAlert div.buttons span:first-of-type").click(function() {
 			hide();
 			options.accept();
 		});
-		$("#jmodalAlert div.buttons span:last-of-type").click(function(){
+		$("#jmodalAlert div.buttons span:last-of-type").click(function() {
 			hide();
 			options.deny();
 		});
@@ -134,17 +169,18 @@ function jConfirm(option){
 		show()
 	}, 100);
 
-	var show = function(){
+	var show = function() {
 		$("body").addClass("modal-up");
 		$("#jmodalAlert").addClass("active");
 	}
 
-	var hide = function(){
+	var hide = function() {
 		$("#jmodalAlert").removeClass("active");
 
-		if(!$("#jmodalAlert").hasClass("active")){
+		if (!$("#jmodalAlert").hasClass("active")) {
 			$("body").removeClass("modal-up");
 		}
 		$("#jmodalAlert div.buttons span").unbind("click");
 	}
 }
+//})(jQuery, window, document);
