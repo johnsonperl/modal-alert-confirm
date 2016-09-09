@@ -14,16 +14,15 @@ $(function(){
 		jAlert({
 			body:"稍后弹出 Confirm",
 			accept:function(){
-				/*jConfirm({
+				jConfirm({
 					body:"要弹出html层吗",
 					button_deny:"不接受",
 					accept:function(){
-						jModal({clickclose:true,html:"html code here"});
+						jModal({clickclose:true,html:"<div onclick='jAlert({body:\"I am here again!\"})'>Click me, you will get supprise</div>",width:"600px",height:"500px"});
 					}
-				})*/
+				})
 			}
 		});
-		//jModal({html:'<div>upi</div>',clickclose:true})
 	})
 })
 </script>

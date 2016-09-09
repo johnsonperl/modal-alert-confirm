@@ -1,10 +1,10 @@
 /*modal*/
-#jmodal *{font-family: "Microsoft YaHei";color:#333;}
+#jmodal{font-family: "Microsoft YaHei";color:#333;}
 #jmodal.dark{background-color:rgba(0,0,0,.8);}
 #jmodal{width:100%;height:100%;position: fixed;top:0 !important;left:0 !important;visibility: hidden;opacity: 0;z-index:999999;}
-
+#jmodal > div{visibility: hidden;opacity: 0}
 #jmodal.active{visibility: visible;opacity: 1}
-#jmodal.active #layerModal.show, #jmodal.active #layerAlert.show, #jmodal.active #layerAlert.show{animation-name: scaleIn;-webkit-animation-name: scaleIn;}
+#jmodal.active #layerModal.show, #jmodal.active #layerAlert.show, #jmodal.active #layerConfirm.show{animation-name: scaleIn;-webkit-animation-name: scaleIn;visibility: visible;}
 #layerModal{border:4px solid #fff;border-radius: 5px;background-color:#fff;}
 #layerModal,#layerAlert,#layerConfirm{position: absolute;left:50%;top:50%;animation-name:scaleOut;-webkit-animation-name:scaleOut;}
 
@@ -31,13 +31,17 @@ body.modal-up{overflow:hidden;}
     to {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;}
 }
 /*modal alert*/
-#layerAlert {padding:0 10px;box-shadow: 0px 0px 10px rgba(34,36,38,.25);border-radius: 6px}
-#layerAlert div:first-of-type{height:50px;line-height: 50px;font-size:18px;border-bottom: 1px solid rgba(34,36,38,.15);color:rgba(0,0,0,.85);}
-#layerAlert div:nth-of-type(2){font-size:14px;padding:22px 0 ;line-height: 1.8em}
-#layerAlert div:last-of-type{height:50px;line-height: 50px;position: absolute;bottom:0;left:0;background-color:#F9FAFB;width:100%;text-align: right}
-#layerAlert .buttons span{display:inline-block;margin-right:20px;padding:0 15px;color:#fff;height:36px;line-height: 36px;margin-top:7px;border-radius: 4px;font-size:14px;cursor:pointer;}
-#layerAlert .buttons span:first-of-type{background-color:#2185D0;}
-#layerAlert .buttons span:first-of-type:hover{background-color:#1678c2;}
+.jalcf {padding:0 10px;box-shadow: 0px 0px 10px rgba(34,36,38,.25);border-radius: 6px;overflow:hidden;background-color:#fff;}
+.jalcf div:first-of-type{height:50px;line-height: 50px;font-size:18px;border-bottom: 1px solid rgba(34,36,38,.15);color:rgba(0,0,0,.85);}
+.jalcf div:nth-of-type(2){font-size:14px;padding:22px 0 ;line-height: 1.8em}
+.jalcf div:last-of-type{height:50px;line-height: 50px;position: absolute;bottom:0;left:0;background-color:#F9FAFB;width:100%;text-align: right}
+.jalcf .buttons span{display:inline-block;margin-right:20px;padding:0 15px;color:#fff;height:36px;line-height: 36px;margin-top:7px;border-radius: 4px;font-size:14px;cursor:pointer;}
+.jalcf .buttons span:first-of-type{background-color:#2185D0;}
+.jalcf .buttons span:first-of-type:hover{background-color:#1678c2;}
 /*modal confirm*/
-#jmodalAlert .buttons span:nth-of-type(2){background-color:#949494;}
-#jmodalAlert .buttons span:nth-of-type(2):hover{background-color:#656565;}
+.jalcf .buttons span:nth-of-type(2){background-color:#949494;}
+.jalcf .buttons span:nth-of-type(2):hover{background-color:#656565;}
+/*z-index*/
+#layerModal{z-index:888;}
+#layerAlert{z-index:1000;}
+#layerConfirm{z-index:999;}

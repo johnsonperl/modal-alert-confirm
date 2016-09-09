@@ -1,5 +1,3 @@
-;
-//(function($, window, document, undefined) {
 //initiation
 var jmodalBox = "jmodal";
 var layer_modal = "layerModal";
@@ -24,10 +22,7 @@ function jModal(option) {
 		$("#" + jmodalBox).append('<div id="' + layer_modal + '" class="modalant" onclick="jstopPPg(event)"><div></div><span id="jclosemodal" onclick="jmHide(\'' + layer_modal + '\')"></span></div>');
 	}
 
-
-
-	var action = function() {
-		$("#" + layer_modal).css({
+	setTimeout(functi$("#" + layer_modal).css({
 			width: options.width,
 			height: options.height,
 			"margin-left": -(parseFloat(options.width) / 2) + "px",
@@ -41,10 +36,6 @@ function jModal(option) {
 		} else {
 			$("#" + jmodalBox).unbind("click");
 		}
-	}
-
-	setTimeout(function() {
-		action();
 		jmShow(layer_modal);
 	}, 100);
 }
@@ -56,7 +47,7 @@ function jstopPPg(e) {
 function jmShow(layer) {
 	if (layer == layer_modal) {
 		$("#" + jmodalBox).addClass("dark");
-	} else {
+	} else if (!$("#" + layer_modal).hasClass("show")) {
 		$("#" + jmodalBox).removeClass("dark");
 	}
 	$("#" + layer).addClass("show");
@@ -94,19 +85,19 @@ function jAlert(option) {
 
 	$.extend(options, option);
 
-	if ($("#"+layer_alert).length == 0) {
-		$("#"+jmodalBox).append('<div id="'+layer_alert+'" class="modalant"></div>');
+	if ($("#" + layer_alert).length == 0) {
+		$("#" + jmodalBox).append('<div id="' + layer_alert + '" class="modalant jalcf" onclick="jstopPPg(event)"></div>');
 	}
 
 	setTimeout(function() {
-		$("#"+layer_alert).css({
+		$("#" + layer_alert).css({
 			width: options.width,
 			height: options.height,
 			"margin-left": -(parseFloat(options.width) / 2) + "px",
 			"margin-top": -(parseFloat(options.height) / 2) + "px"
 		}).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button + '</span></div>');
 
-		$("#"+layer_alert+" div.buttons span").click(function() {
+		$("#" + layer_alert + " div.buttons span").click(function() {
 			jmHide(layer_alert);
 			options.accept();
 		});
@@ -128,43 +119,25 @@ function jConfirm(option) {
 
 	$.extend(options, option);
 
-	if ($("body #jmodalAlert").length == 0) {
-		$("body").append('<div id="jmodalAlert"></div>');
+	if ($("#" + layer_confirm).length == 0) {
+		$("#" + jmodalBox).append('<div id="' + layer_confirm + '" class="modalant jalcf" onclick="jstopPPg(event)"></div>');
 	}
-	$("#jmodalAlert").html('<div id="alertbox" class="modalant"><div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button_accept + '</span><span>' + options.button_deny + '</span></div></div>');
-
 	setTimeout(function() {
-		$("#jmodalAlert > div").css({
+		$("#" + layer_confirm).css({
 			width: options.width,
 			height: options.height,
 			"margin-left": -(parseFloat(options.width) / 2) + "px",
 			"margin-top": -(parseFloat(options.height) / 2) + "px"
-		});
+		}).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button_accept + '</span><span>' + options.button_deny + '</span></div>');
 
-		$("#jmodalAlert div.buttons span:first-of-type").click(function() {
-			hide();
+		$("#" + layer_confirm + " div.buttons span:first-of-type").click(function() {
+			jmHide(layer_confirm);
 			options.accept();
 		});
-		$("#jmodalAlert div.buttons span:last-of-type").click(function() {
-			hide();
+		$("#" + layer_confirm + " div.buttons span:last-of-type").click(function() {
+			jmHide(layer_confirm);
 			options.deny();
 		});
-
-		show()
+		jmShow(layer_confirm)
 	}, 100);
-
-	var show = function() {
-		$("body").addClass("modal-up");
-		$("#jmodalAlert").addClass("active");
-	}
-
-	var hide = function() {
-		$("#jmodalAlert").removeClass("active");
-
-		if (!$("#jmodalAlert").hasClass("active")) {
-			$("body").removeClass("modal-up");
-		}
-		$("#jmodalAlert div.buttons span").unbind("click");
-	}
 }
-//})(jQuery, window, document);
