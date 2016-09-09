@@ -2,11 +2,12 @@
 #jmodal{font-family: "Microsoft YaHei";color:#333;}
 #jmodal.dark{background-color:rgba(0,0,0,.8);}
 #jmodal{width:100%;height:100%;position: fixed;top:0 !important;left:0 !important;visibility: hidden;opacity: 0;z-index:999999;}
-#jmodal > div{visibility: hidden;opacity: 0}
+#jmodal > div,#layerModalRaw{visibility: hidden;opacity: 0}
 #jmodal.active{visibility: visible;opacity: 1}
-#jmodal.active #layerModal.show, #jmodal.active #layerAlert.show, #jmodal.active #layerConfirm.show{animation-name: scaleIn;-webkit-animation-name: scaleIn;visibility: visible;}
+#jmodal.active #layerModal.show, #jmodal.active #layerAlert.show, #jmodal.active #layerConfirm.show, #layerModalRaw.show{animation-name: scaleIn;-webkit-animation-name: scaleIn;visibility: visible;}
 #layerModal{border:4px solid #fff;border-radius: 5px;background-color:#fff;}
-#layerModal,#layerAlert,#layerConfirm{position: absolute;left:50%;top:50%;animation-name:scaleOut;-webkit-animation-name:scaleOut;}
+#layerModal,#layerAlert,#layerConfirm,#layerModalRaw{position: absolute;left:50%;top:50%;animation-name:scaleOut;-webkit-animation-name:scaleOut;}
+#layerModalRaw{position: fixed !important}
 
 .modalant{animation-fill-mode:both;animation-duration:0.6s;animation-timing-function:cubic-bezier(.215,.61,.355,1);}
 #jclosemodal{width:26px;height:26px;display: block;background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAUVBMVEUAAAD////////////////////////////////////////////////////////////////////////BwcHu7u6AgIBmZmajo6O3t7eMjIx0dHQX9hFRAAAAEnRSTlMA+sfDvj8J5piBLycS55uZd3bubb3EAAAAq0lEQVQoz32SWw6EIAxFi6CIby8+Z/8LnYyIrRPC+WngpEkLlyLtbKxS1swtvSk1HnQpRFXjRV1F0xX4o+juHjbsQt+ABMM1AZL8ZomzLe+qiZp48/GhrqGiIYcbv/nL7Ag4MpCODQxZCHewgSUF5thOPiiplvXcvFBWmB2enSUjDYQz5KSRzj0rw8e6xJVJI4nOPy+NKTNmvjIfgHRs8mFj2sn0SvVmeiL6BYEAJNfnXqR7AAAAAElFTkSuQmCC') no-repeat 0 0;position: absolute;right:-15px;top:-15px;cursor:pointer;border:2px solid #c7c7c7;border-radius: 50%}
@@ -14,21 +15,21 @@
 #jclosemodal:hover{transform:rotate(360deg);-webkit-transform:rotate(360deg);}
 body.modal-up{overflow:hidden;}
 @keyframes scaleIn {
-    from {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;}
-    to {transform: scale(1);-webkit-transform: scale(1);opacity:1;}
+    from {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;visibility: hidden}
+    to {transform: scale(1);-webkit-transform: scale(1);opacity:1;visibility: visible;}
 }
 
 @-webkit-keyframes scaleIn {
-    from {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;}
-    to {transform: scale(1);-webkit-transform: scale(1);opacity:1;}
+   from {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;visibility: hidden}
+    to {transform: scale(1);-webkit-transform: scale(1);opacity:1;visibility: visible;}
 }
 @keyframes scaleOut {
-    from {transform: scale(1);-webkit-transform: scale(1);opacity:1;}
-    to {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;}
+    from {transform: scale(1);-webkit-transform: scale(1);opacity:1;visibility: visible;}
+    to {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;visibility: hidden}
 }
 @-webkit-keyframes scaleOut {
-    from {transform: scale(1);-webkit-transform: scale(1);opacity:1;}
-    to {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;}
+    from {transform: scale(1);-webkit-transform: scale(1);opacity:1;visibility: visible;}
+    to {transform: scale(0.8);-webkit-transform: scale(0.8);opacity:0;visibility: hidden}
 }
 /*modal alert*/
 .jalcf {padding:0 10px;box-shadow: 0px 0px 10px rgba(34,36,38,.25);border-radius: 6px;overflow:hidden;background-color:#fff;}
@@ -43,5 +44,8 @@ body.modal-up{overflow:hidden;}
 .jalcf .buttons span:nth-of-type(2):hover{background-color:#656565;}
 /*z-index*/
 #layerModal{z-index:888;}
+#layerModalRaw{z-index:777;}
 #layerAlert{z-index:1000;}
 #layerConfirm{z-index:999;}
+/*modal raw */
+#layerModalRaw{background-color: transparent;}

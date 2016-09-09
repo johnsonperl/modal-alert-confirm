@@ -15,7 +15,9 @@ a{margin-right:20px;font-size:16px;}
 <a href="javascript:jmodal.Alert({title:'Warning',body:'OMG',button:'KILL ME'})">jmodal.Alert()</a>
 <a href="javascript:jmodal.Confirm({body:'Would you like to come?',onAccept:function(){alert('Welcome')}})">jmodal.Confirm()</a>
 <a href="javascript:jmodal.Modal({html:'<h1>Thank you</h1><p>You are a kind man.</p>'})">jmodal.Modal()</a>
+<a href="javascript:void(0)" id="div2">jmodal.ModalRaw()</a>
 <a href="javascript:void(0)" id='div1'>Multiple Modals</a>
+<div style="height:2000px;"></div>
 <script>
 $(function(){
 	$("#div1").click(function(){
@@ -31,6 +33,13 @@ $(function(){
 				})
 			}
 		});
+	});
+	$("#div2").click(function(){
+		jmodal.ModalRaw({
+			html: '<div style=\'background-color:pink;border-radius:10px;\'><h1>Thank you</h1><p>You are a kind man.</p><a href="javascript:jmodal.Hide(\'layerModalRaw\')">Close</a></div>',
+			isBlockbg: false,
+			zIndex: 999999
+		})
 	})
 })
 </script>

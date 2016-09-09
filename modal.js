@@ -1,6 +1,10 @@
+/**
+ * [jmodal 用于创建弹出层，美化javascript的window.alert() 和 window.confirm()，使用方便简单。github地址：https://github.com/johnsonperl/modal-alert-confirm]
+ */
 var jmodal = {
 	modalBox: "jmodal",
 	layer_modal: "layerModal",
+	layer_modalRaw: "layerModalRaw",
 	layer_alert: "layerAlert",
 	layer_confirm: "layerConfirm",
 
@@ -26,21 +30,32 @@ var jmodal = {
 	},
 
 	Hide: function(layer) {
-		var layer_arr = new Array(this.layer_modal, this.layer_alert, this.layer_confirm);
-		var ok = true;
-		for (var i = 0, len = layer_arr.length; i < len; i++) {
-			if (layer_arr[i] != layer && $("#" + layer_arr[i]).hasClass("show")) {
-				ok = false;
-				break;
-			}
-		}
-
-		if (ok) {
+		if (!this.isActive(layer)) {
 			$("#" + this.modalBox).removeClass("active");
 			$("body").removeClass("modal-up");
 		}
 
+		if(layer == this.layer_modal){
+			$("#" + this.modalBox).removeClass("dark");
+		}
+
+		if(layer != this.layer_modalRaw && $("#" + this.layer_modalRaw).hasClass("show")){
+			this.removeBg()
+		}
+
 		$("#" + layer).removeClass("show");
+	},
+
+	isActive: function(layer) {
+		var layer_arr = new Array(this.layer_modal, this.layer_alert, this.layer_confirm,this.layer_modalRaw);
+		var ok = false;
+		for (var i = 0, len = layer_arr.length; i < len; i++) {
+			if (layer_arr[i] != layer && $("#" + layer_arr[i]).hasClass("show")) {
+				ok = true;
+				break;
+			}
+		}
+		return ok;
 	},
 
 	resizeLayer: function(layer, options) {
@@ -48,8 +63,14 @@ var jmodal = {
 			width: options.width,
 			height: options.height,
 			"margin-left": -(parseFloat(options.width) / 2) + "px",
-			"margin-top": -(parseFloat(options.height) / 2) + "px"
+			"margin-top": -(parseFloat(options.height) / 2) + "px",
+			"z-index":options.zIndex
 		});
+	},
+
+	removeBg:function(){
+		$("#" + this.modalBox).removeClass("active");
+		$("body").removeClass("modal-up");
 	},
 
 	Modal: function(option) {
@@ -57,7 +78,8 @@ var jmodal = {
 			html: "",
 			width: "400px",
 			height: "300px",
-			clickclose: false
+			clickclose: false,
+			zIndex:888
 		}
 		$.extend(options, option);
 
@@ -80,6 +102,31 @@ var jmodal = {
 		this.Show(this.layer_modal);
 	},
 
+	ModalRaw: function(option) {
+		var options = {
+			html: "",
+			width: "400px",
+			height: "300px",
+			isBlockbg:true,
+			zIndex:777
+		}
+		$.extend(options, option);
+
+		this.inits()
+
+		if ($("#" + this.layer_modalRaw).length == 0) {
+			$("body").append('<div id="' + this.layer_modalRaw + '" class="modalant" onclick="jmodal.StopPPg(event)"><div></div></div>');
+		}
+
+
+		this.resizeLayer(this.layer_modalRaw, options).find("div:first-of-type").html(options.html);
+		this.Show(this.layer_modalRaw);
+		if(!options.isBlockbg && !this.isActive(this.layer_modalRaw)){
+			this.removeBg()
+		}
+	},
+
+
 	Alert: function(option) {
 		var options = {
 			title: "提示",
@@ -87,7 +134,8 @@ var jmodal = {
 			width: "400px",
 			height: "200px",
 			button: "确定",
-			onAccept: function() {}
+			onAccept: function() {},
+			zIndex:1000
 		}
 
 		$.extend(options, option);
@@ -116,7 +164,8 @@ var jmodal = {
 			button_onAccept: "确定",
 			button_onDeny: "取消",
 			onAccept: function() {},
-			onDeny: function() {}
+			onDeny: function() {},
+			zIndex:999
 		}
 
 		$.extend(options, option);
