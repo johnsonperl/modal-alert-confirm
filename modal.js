@@ -3,6 +3,12 @@ var jmodal = {
 	layer_modal: "layerModal",
 	layer_alert: "layerAlert",
 	layer_confirm: "layerConfirm",
+
+	inits:function(){
+		if($("#"+this.modalBox).length == 0){
+			$("body").append('<div id="' + jmodal.modalBox + '"></div>');
+		}
+	},
 	//stop click propagation
 	StopPPg: function(e) {
 		e.stopPropagation();
@@ -55,6 +61,8 @@ var jmodal = {
 		}
 		$.extend(options, option);
 
+		this.inits()
+
 		if ($("#" + this.layer_modal).length == 0) {
 			$("#" + this.modalBox).append('<div id="' + this.layer_modal + '" class="modalant" onclick="jmodal.StopPPg(event)"><div></div><span id="jclosemodal" onclick="jmodal.Hide(\'' + this.layer_modal + '\')"></span></div>');
 		}
@@ -84,6 +92,8 @@ var jmodal = {
 
 		$.extend(options, option);
 
+		this.inits()
+
 		if ($("#" + this.layer_alert).length == 0) {
 			$("#" + this.modalBox).append('<div id="' + this.layer_alert + '" class="modalant jalcf" onclick="jmodal.StopPPg(event)"></div>');
 		}
@@ -111,6 +121,8 @@ var jmodal = {
 
 		$.extend(options, option);
 
+		this.inits()
+
 		if ($("#" + this.layer_confirm).length == 0) {
 			$("#" + this.modalBox).append('<div id="' + this.layer_confirm + '" class="modalant jalcf" onclick="jmodal.StopPPg(event)"></div>');
 		}
@@ -128,9 +140,3 @@ var jmodal = {
 		this.Show(this.layer_confirm)
 	}
 }
-
-
-
-$(function() {
-	$("body").append('<div id="' + jmodal.modalBox + '"></div>');
-});
