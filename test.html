@@ -11,14 +11,14 @@
 <script>
 $(function(){
 	$("#div1").click(function(){
-		jAlert({
+		jmodal.Alert({
 			body:"稍后弹出 Confirm",
 			accept:function(){
-				jConfirm({
+				jmodal.Confirm({
 					body:"要弹出html层吗",
 					button_deny:"不接受",
 					accept:function(){
-						jModal({clickclose:true,html:"<div onclick='jAlert({body:\"I am here again!\"})'>Click me, you will get supprise</div>",width:"600px",height:"500px"});
+						jmodal.Modal({clickclose:true,html:"<div onclick='jmodal.Alert({body:\"I am here again!\"})'>Click me, you will get supprise</div>",width:"600px",height:"500px"});
 					}
 				})
 			}
