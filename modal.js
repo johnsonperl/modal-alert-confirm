@@ -79,7 +79,7 @@ var jmodal = {
 			width: "400px",
 			height: "200px",
 			button: "确定",
-			accept: function() {}
+			onAccept: function() {}
 		}
 
 		$.extend(options, option);
@@ -92,7 +92,7 @@ var jmodal = {
 
 		$("#" + this.layer_alert + " div.buttons span").click(function() {
 			jmodal.Hide(jmodal.layer_alert);
-			options.accept();
+			options.onAccept();
 		});
 		this.Show(this.layer_alert);
 	},
@@ -103,10 +103,10 @@ var jmodal = {
 			body: "",
 			width: "400px",
 			height: "200px",
-			button_accept: "确定",
-			button_deny: "取消",
-			accept: function() {},
-			deny: function() {}
+			button_onAccept: "确定",
+			button_onDeny: "取消",
+			onAccept: function() {},
+			onDeny: function() {}
 		}
 
 		$.extend(options, option);
@@ -115,15 +115,15 @@ var jmodal = {
 			$("#" + this.modalBox).append('<div id="' + this.layer_confirm + '" class="modalant jalcf" onclick="jmodal.StopPPg(event)"></div>');
 		}
 
-		this.resizeLayer(this.layer_confirm, options).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button_accept + '</span><span>' + options.button_deny + '</span></div>');
+		this.resizeLayer(this.layer_confirm, options).html('<div>' + options.title + '</div><div>' + options.body + '</div><div class="buttons"><span>' + options.button_onAccept + '</span><span>' + options.button_onDeny + '</span></div>');
 
 		$("#" + this.layer_confirm + " div.buttons span:first-of-type").click(function() {
 			jmodal.Hide(jmodal.layer_confirm);
-			options.accept();
+			options.onAccept();
 		});
 		$("#" + this.layer_confirm + " div.buttons span:last-of-type").click(function() {
 			jmodal.Hide(jmodal.layer_confirm);
-			options.deny();
+			options.onDeny();
 		});
 		this.Show(this.layer_confirm)
 	}

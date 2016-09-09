@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>modal test file</title>
 <link href="modal.css" rel="stylesheet" />
 <script src="http://resource.nbibyer.com/jquery-1.12.4.min.js"></script>
 <script src="modal.js"></script>
+<style rel="stylesheet">
+a{margin-right:20px;font-size:16px;}
+</style>
+<base target="_self" />
 </head>
 <body>
-<div id="div1" style="width:300px;height:300px;background-color:blue;text-align:center;line-height:300px;font-size:16px;color:#fff">点击弹出</div>
+<a href="javascript:jmodal.Alert({title:'Warning',body:'OMG',button:'KILL ME'})">jmodal.Alert()</a>
+<a href="javascript:jmodal.Confirm({body:'Would you like to come?',onAccept:function(){alert('Welcome')}})">jmodal.Confirm()</a>
+<a href="javascript:jmodal.Modal({html:'<h1>Thank you</h1><p>You are a kind man.</p>'})">jmodal.Modal()</a>
+<a href="javascript:void(0)" id='div1'>Multiple Modals</a>
 <script>
 $(function(){
 	$("#div1").click(function(){
 		jmodal.Alert({
 			body:"稍后弹出 Confirm",
-			accept:function(){
+			onAccept:function(){
 				jmodal.Confirm({
 					body:"要弹出html层吗",
 					button_deny:"不接受",
-					accept:function(){
+					onAccept:function(){
 						jmodal.Modal({clickclose:true,html:"<div onclick='jmodal.Alert({body:\"I am here again!\"})'>Click me, you will get supprise</div>",width:"600px",height:"500px"});
 					}
 				})
