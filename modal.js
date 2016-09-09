@@ -31,25 +31,28 @@ var jmodal = {
 
 	Hide: function(layer) {
 		if (!this.isActive(layer)) {
-			$("#" + this.modalBox).removeClass("active");
-			$("body").removeClass("modal-up");
+			this.removeBg()
 		}
 
 		if(layer == this.layer_modal){
 			$("#" + this.modalBox).removeClass("dark");
 		}
 
-		if(layer != this.layer_modalRaw && $("#" + this.layer_modalRaw).hasClass("show")){
+		if(layer != this.layer_modalRaw && $("#" + this.layer_modalRaw).hasClass("show")  && $("#" + this.layer_modalRaw).hasClass("nobg") && !this.isActive(layer,3)){
 			this.removeBg()
 		}
 
 		$("#" + layer).removeClass("show");
 	},
 
-	isActive: function(layer) {
+	isActive: function(layer,n) {
 		var layer_arr = new Array(this.layer_modal, this.layer_alert, this.layer_confirm,this.layer_modalRaw);
 		var ok = false;
-		for (var i = 0, len = layer_arr.length; i < len; i++) {
+		var len  = layer_arr.length;
+		if(arguments.length == 2 && n < len){
+			len = n;
+		}
+		for (var i = 0; i < len; i++) {
 			if (layer_arr[i] != layer && $("#" + layer_arr[i]).hasClass("show")) {
 				ok = true;
 				break;
@@ -122,7 +125,10 @@ var jmodal = {
 		this.resizeLayer(this.layer_modalRaw, options).find("div:first-of-type").html(options.html);
 		this.Show(this.layer_modalRaw);
 		if(!options.isBlockbg && !this.isActive(this.layer_modalRaw)){
-			this.removeBg()
+			this.removeBg();
+			$("#"+this.layer_modalRaw).addClass("nobg");
+		}else{
+			$("#"+this.layer_modalRaw).removeClass("nobg");
 		}
 	},
 
