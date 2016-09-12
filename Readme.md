@@ -51,9 +51,10 @@ A modal displays content that temporarily blocks interactions with the main view
 |**isBlockbg**|是否要让背景不可点击|true|
 |zIndex|CSS 的 z-index 属性|777|
 
+**用到CSS的`position:fixed`，注意兼容性。**
+
 ![jmodal.ModalRaw()](http://yake.shbyer.com/m/temp/raw.png "")
 
-**用到CSS的`position:fixed`，注意兼容性。**
 
 ## jmodal.Show(layer String)
 显示弹出层。
@@ -94,4 +95,4 @@ jmodal.ModalRaw({
 })
 ```
 ## DEMO（演示）
-其中`test.html`文件是演示文件。
+其中`demo.html`文件是演示文件。
