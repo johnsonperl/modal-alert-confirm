@@ -12,6 +12,8 @@ A modal displays content that temporarily blocks interactions with the main view
 |onAccept|点击按钮时的回调函数|function(){}|
 |zIndex|CSS 的 z-index 属性|1000|
 
+![jmodal.Alert()](http://yake.shbyer.com/m/temp/alert.png "")
+
 ## jmodal.Confirm(option Object)
 |参数|说明|默认值|
 |----|----|----:|
@@ -25,6 +27,8 @@ A modal displays content that temporarily blocks interactions with the main view
 |onDeny|点击取消按钮时的回调函数|function(){}|
 |zIndex|CSS 的 z-index 属性|999|
 
+![jmodal.Confirm()](http://yake.shbyer.com/m/temp/confirm.png "")
+
 ## jmodal.Modal(option Object)
 |参数|说明|默认值|
 |----|----|----:|
@@ -33,6 +37,8 @@ A modal displays content that temporarily blocks interactions with the main view
 |height|弹出层的高度|300px|
 |clickclose|点击空白处是否关闭弹出层|false|
 |zIndex|CSS 的 z-index 属性|888|
+
+![jmodal.Modal()](http://yake.shbyer.com/m/temp/modal.png "")
 
 ## jmodal.ModalRaw(option Object)
 这个不带关闭按钮，可以完全定制弹出层的内容。
@@ -44,6 +50,8 @@ A modal displays content that temporarily blocks interactions with the main view
 |height|弹出层的高度|300px|
 |**isBlockbg**|是否要让背景不可点击|true|
 |zIndex|CSS 的 z-index 属性|777|
+
+![jmodal.ModalRaw()](http://yake.shbyer.com/m/temp/raw.png "")
 
 **用到CSS的`position:fixed`，注意兼容性。**
 
