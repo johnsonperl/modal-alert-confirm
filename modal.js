@@ -1,5 +1,5 @@
 /**
- * [jmodal 用于创建弹出层，美化javascript的window.alert() 和 window.confirm()，使用方便简单。github地址：https://github.com/johnsonperl/modal-alert-confirm]
+ * jmodal 用于创建弹出层，美化javascript的window.alert() 和 window.confirm()，使用方便简单。github地址：https://github.com/johnsonperl/modal-alert-confirm
  */
 var jmodal = {
 	modalBox: "jmodal",
@@ -30,19 +30,21 @@ var jmodal = {
 	},
 
 	Hide: function(layer) {
-		if (!this.isActive(layer)) {
-			this.removeBg()
-		}
+		$("#" + layer).removeClass("show");
 
 		if(layer == this.layer_modal){
 			$("#" + this.modalBox).removeClass("dark");
 		}
 
-		if(layer != this.layer_modalRaw && $("#" + this.layer_modalRaw).hasClass("show")  && $("#" + this.layer_modalRaw).hasClass("nobg") && !this.isActive(layer,3)){
-			this.removeBg()
-		}
+		setTimeout(function(){
+			if (!jmodal.isActive(layer)) {
+				jmodal.removeBg()
+			}
 
-		$("#" + layer).removeClass("show");
+			if(layer != jmodal.layer_modalRaw && $("#" + jmodal.layer_modalRaw).hasClass("show")  && $("#" + jmodal.layer_modalRaw).hasClass("nobg") && !jmodal.isActive(layer,3)){
+				jmodal.removeBg()
+			}
+		},600);
 	},
 
 	isActive: function(layer,n) {
@@ -124,9 +126,12 @@ var jmodal = {
 
 		this.resizeLayer(this.layer_modalRaw, options).find("div:first-of-type").html(options.html);
 		this.Show(this.layer_modalRaw);
-		if(!options.isBlockbg && !this.isActive(this.layer_modalRaw)){
-			this.removeBg();
+
+		if(!options.isBlockbg){
 			$("#"+this.layer_modalRaw).addClass("nobg");
+			if(!this.isActive(this.layer_modalRaw)){
+				this.removeBg();
+			}
 		}else{
 			$("#"+this.layer_modalRaw).removeClass("nobg");
 		}
