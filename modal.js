@@ -29,7 +29,7 @@ var jmodal = {
 		$("#" + this.modalBox).addClass("active");
 	},
 
-	Hide: function(layer) {
+	Hide: function(layer,callBack) {
 		$("#" + layer).removeClass("show");
 
 		if(layer == this.layer_modal){
@@ -45,6 +45,9 @@ var jmodal = {
 				jmodal.removeBg()
 			}
 		},600);
+		if(arguments.length == 2){
+			callBack()
+		}
 	},
 
 	isActive: function(layer,n) {

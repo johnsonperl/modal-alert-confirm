@@ -66,8 +66,8 @@ A modal displays content that temporarily blocks interactions with the main view
 |layerModal|jmodal.Modal(option Object)|
 |layerModalRaw|jmodal.ModalRaw(option Object)|
 
-## jmodal.Hide(layer String)
-关闭弹出层。参数说明同 jmodal.Show(layer String)。
+## jmodal.Hide(layer String[,callBack function])
+关闭弹出层。layer参数说明同 jmodal.Show(layer String)，callBack是回调函数，非必须。
 
 ## 使用方法
 ``` javascript
